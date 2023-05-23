@@ -1,0 +1,72 @@
+// Proffessor look-like outfit
+// First mission: There are 5 statues covered in moss around the forest, use the statues ( with item or not) to clean them collecting information to the proffessor. 
+//Second mission: Use the 5 statues with a fire bug making them lit and place a herb on the alter. If all statues are lit and herb is on alter, open a passage. Chance of spawning some monsters on player position when litting each statue. 
+// Third mission: 
+
+local player = Player(cid)
+local storage = 1111
+local statue_Storage = 1112
+
+
+if not npcHandler:isFocused(cid) then
+	if msg == "hi" or msg == "hello" then
+		if player:getStorageValue(storage) == -1 then
+		npcHandler:say("Greetings ".. player:getName() ..", what brings you to these woods?"
+		
+		elseif player:getStorageValue(storage) == 1 then
+		npcHandler:say("Did you find anything?",cid)
+		talkstate[talkUser] = 3
+		
+		elseif player:getStorageValue(storage) == 2 then
+		npcHandler:say("Did you perform the ritual?",cid)
+		elseif player:getStorageValue(storage) == 3 then
+		npcHandler:say("",cid)
+		
+		
+		end
+	end	
+npcHandler:addFocus(cid)
+end	
+	
+
+
+	
+		if msgcontains("woods")then
+			npcHandler:say({"As you might have noticed, the nature in this forest is unormally rich, making rare flowers bloom everywhere.. Once upon a time,  there was kid, born in the forest with a special talent, connected to the wild nature, speaking with it as it would be alive.. ",
+			"One day, a rogue clan attacked and burned  a small settlement near the forest.. The wind and flames together spread to the forest, burning the beatifull wild nature that it once were. It chased the kid away from the forest.. As the years went by, the kid improved the talents of the earth, ",
+			"making his adevntures around the world, learning and improving his ability to control the earth. The {knowledge} he gathered were lost with him and it is said that the forest blooms in the memory of 'DRUID NAME'." },cid)
+			talkstate[talkUser] = 1
+		
+		
+			elseif msgcontains("knowledge") or msgcontains("book") or msgcontains("scroll")then
+			if talkstate[talkUser] = 1 then
+			npcHandler:say({"As mentioned, the knowledge was lost with this druid and has been searched for by hundreds of scientists, including myself,  trying to understand how the druid was able connect to the nature how he did and how his memory is left behind in the tree's.",
+			"Would you like to help me explore and find this knowledge? "},cid)
+			talkstate[talkUser] = 2
+			end
+		
+		end
+		
+		
+		
+		if msgcontains("yes")then
+			if talkState[talkUser] == 2 then
+			npcHandler:say("That is fantastic news! As this forest was where he was born, i still believe that this is where he spent his last days. The unormal rich nature of this forest, also support's my theory. First of all, make a deep search of the forest, see if you can find anything that can lead to the druid. Report back to me if you find anything.",cid)
+			player:setStorageValue(storage,1)
+			elseif talkState[talkUser] == 3 then
+				if player:getStorageValue(statue_storage) == 5 then
+			npcHandler:say("Overgrown statues you say? Intresting.. I've read in some ancient scrolls of an ritual consisting of 5 statues and an alter, should open some kind of gateway.. Would you be intrested in trying this ritual?",cid)
+			talkState[talkUser] == 4
+				end
+			elseif	talkState[talkUser] == 4 then
+			npcHandler:say("Light up each statue with a firebug and place the herb(DEFINE HERB TYPE HERE). Make sure to place the herb on the alter before lightning them up. Be careful, it is also written in the scrolls that there's a possibility to summon something evil.",cid)
+			player:setStorageValue(storage,3)
+		
+		
+		
+		elseif msgcontains("bye") then
+		npcHandler:say("Good bye ".. player:getName() .. ".",cid)
+		npcHandler:releaseFocus(cid)
+		end
+		
+ 
